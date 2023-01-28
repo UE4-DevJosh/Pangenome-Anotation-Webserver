@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>	
+	    <title>Pangenome Server [Home]</title>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/fileTable.css">
+        <script src="js/home.js" defer></script>
+    </head>
+
+    <body>
+        <div id="main">
+            <div id="banner">
+                <h1>Pangenome Server [Home]</h1>
+            </div>
+            <div id="nested">
+                <div id="left-col">
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="currentCommand">Current Process</a></li>
+                            <li><a href="upload">Upload</a></li>
+                            <li><a href="download">Download</a></li>
+                            <li><a href="prokka">Prokka</a></li>
+                            <li><a href="roary">Roary</a></li>
+                            <li><a href="roaryPlots">Roary Plots</a></li>
+                            <li><a href="cloudCoreGenome">Cloud/Core/Shell Genome</a></li>
+                            <li><a href="queryPanGenome">Query Pan Genome</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="right-col">
+                    <form id="deleteForm" action="/delete" method="POST" onsubmit="return validate(this);"><!--action="/delete" method="POST" onsubmit="return validate(this);"-->
+                        <div id="table"></div>
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+
+    </footer>
+
+</html>

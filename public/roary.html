@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>	
+	    <title>Pangenome Server [Roary]</title>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/tables.css">
+        <script src="js/main.js" defer></script>
+        <script src="js/roary.js" defer></script>
+    </head>
+
+    <body>
+
+        <div id="main">
+            <div id="banner">
+                <h1>Pangenome Server [Roary]</h1>
+            </div>
+            <div id="nested">
+                <div id="left-col">
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="currentCommand">Current Process</a></li>
+                            <li><a href="upload">Upload</a></li>
+                            <li><a href="download">Download</a></li>
+                            <li><a href="prokka">Prokka</a></li>
+                            <li><a href="roary">Roary</a></li>
+                            <li><a href="roaryPlots">Roary Plots</a></li>
+                            <li><a href="cloudCoreGenome">Cloud/Core/Shell Genome</a></li>
+                            <li><a href="queryPanGenome">Query Pan Genome</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="right-col">
+
+                    <h1><strong>WARNING:</strong> You must delete all unrelated ".gff" files from the uploads folder. If any unrelated .gff files aren't deleted, they will all be used!!</h1>
+                    <br><br>
+                    <form id="roaryForm" action="/roary" method="POST">
+                        <table>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="p" name="p" value="Threads">
+                                    <label for="p">Number of CPU Threads</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <select id="pText" name="pText">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                      </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="o" name="o" value="clustersOutputFilename">
+                                    <label for="o">Clusters Output Filename</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="oText" id="oText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="e" name="e" value="MultiFastaAlignment">
+                                    <label for="e">Create a MultiFASTA Alignment of core genes using PRANK</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="n" name="n" value="Mafft">
+                                    <label for="n">Fast Core Gene Alignment with MAFFT (Must be used with "Create a MultiFASTA Alignment of core genes using PRANK")</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="i" name="i" value="BlastPIdentity">
+                                    <label for="i">Minimum Percentage Identity for BlastP</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="iText" id="iText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="cd" name="cd" value="CoreGeneIsolates">
+                                    <label for="cd">Percentage of Isolates a Gene Must be in to be Core</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="cdText" id="cdText">
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td>
+                                    <input type="checkbox" id="qcKrakenReport" name="QC Report with Kraken" value="QCKrakenReport">
+                                    <label for="qcKrakenReport">Generate QC Report with Kraken</label><br>
+                                </td>
+                                <td>
+                                    hi
+                                </td>
+                            </tr>
+                        -->
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="b" name="b" value="BlastPExec">
+                                    <label for="b">BlastP Executable</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="bText" id="bText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="c" name="c" value="MCLExec">
+                                    <label for="c">MCL Executable</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="cText" id="cText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="d" name="d" value="MCXDEBlastExec">
+                                    <label for="d">MCXDEBlast Executable</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="dText" id="dText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="g" name="g" value="MaxClusters">
+                                    <label for="g">Maximum Number of Clusters</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="gText" id="gText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="m" name="m" value="MakeBlastDPExec">
+                                    <label for="m">MakeBlastDB Executable</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="mText" id="mText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="r" name="r" value="RPlots">
+                                    <label for="r">Use R Plots</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="s" name="s" value="NoSplitParalogs">
+                                    <label for="s">Don't Split Paralogs</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="t" name="t" value="TranslationTable">
+                                    <label for="t">Translation Table</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="tText" id="tText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="ap" name="ap" value="ParalogsInCore">
+                                    <label for="ap">Allow Paralogs in Core Alignment</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="y" name="y" value="GeneInferenceInfoToSpreadsheet">
+                                    <label for="y">Add Gene Inference Information to Spreadsheet (Doesn't work with "Create MultiFASTA Alignment of Core Genes using PRANK")</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="iv" name="iv" value="MCLInflationValue">
+                                    <label for="iv">Change the MCL Inflation Value</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="ivText" id="ivText">
+                                </td>
+                            </tr>
+                        </table>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+
+    </footer>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>	
+	    <title>Pangenome Server [Query Pan Genome]</title>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/tables.css">
+        <script src="js/queryPanGenome.js" defer></script>
+        <script src="js/main.js" defer></script>
+    </head>
+
+    <body>
+        <div id="main">
+            <div id="banner">
+                <h1>Pangenome Server [Query Pan Genome]</h1>
+            </div>
+            <div id="nested">
+                <div id="left-col">
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="currentCommand">Current Process</a></li>
+                            <li><a href="upload">Upload</a></li>
+                            <li><a href="download">Download</a></li>
+                            <li><a href="prokka">Prokka</a></li>
+                            <li><a href="roary">Roary</a></li>
+                            <li><a href="roaryPlots">Roary Plots</a></li>
+                            <li><a href="cloudCoreGenome">Cloud/Core/Shell Genome</a></li>
+                            <li><a href="queryPanGenome">Query Pan Genome</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="right-col">
+                    <h1><strong>WARNING:</strong> For the Union, Intersection, Complement, and Gene Multifasta actions, you must delete all unrelated ".gff" files from the uploads folder. If any unrelated .gff files aren't deleted, they will all be included in the action!!</h1>
+                    <br><br>
+                    <form action="/queryPanGenome" method="POST" name="queryPanGenome" id="queryPanGenomeForm">
+                        <table>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="g" name="g" value="groupsFileName">
+                                    <label for="g">Groups Filename (Equivalent to the "Clusters Output Filename" with Roary)</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="gText" id="gText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="a" name="a" value="action">
+                                    <label for="a">Action</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <select id="aText" name="aText">
+                                        <option value="union">Union</option>
+                                        <option value="intersection">Intersection</option>
+                                        <option value="complement">Complement</option>
+                                        <option value="gene_multifasta">Gene Multifasta</option>
+                                        <option value="difference">Difference</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="c" name="c" value="percentIsolatesCore">
+                                    <label for="c">Percent of Isolates a gene must be to be in the core</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="cText" id="cText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="n" name="n" value="geneNames">
+                                    <label for="n">Comma Separated List of Gene Names [Must use only with the Gene Multifasta Action]</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="nText" id="nText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="i" name="i" value="compSetOne">
+                                    <label for="i">Filenames of the first comparison set [Must use only with the Difference Action]</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <select id="iText" name="iText" multiple>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="t" name="t" value="compSetTwo">
+                                    <label for="t">Filenames of the second comparison set [Must use only with the Difference Action]</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <select id="tText" name="tText" multiple>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+
+    </footer>
+
+</html>

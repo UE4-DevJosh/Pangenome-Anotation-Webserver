@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+    padding: 20px;
+}
+
+td {
+    width: 25%;
+}
+
+td.extraInfo > * {
+    width: 75%;
+    display: none;
+}
+
+td {
+    display: table-cell;
+    text-align: center;
+    margin: auto;
+}
+
+tr:nth-child(odd) {
+    background-color: #e0e0e0;
+}
+
+#table {
+  display: block;
+  margin-top: 20px;
+}
+
+.thfiles, .tdfiles {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+input[type=checkbox] {
+    display: block;
+    width: 100%;
+}

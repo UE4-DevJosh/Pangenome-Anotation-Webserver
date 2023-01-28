@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>	
+	    <title>Pangenome Server [Upload]</title>
+        <link rel="stylesheet" href="css/base.css">
+        <script src="js/upload.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    </head>
+
+    <body>
+
+        <div id="main">
+            <div id="banner">
+                <h1>Pangenome Server [Upload]</h1>
+            </div>
+            <div id="nested">
+                <div id="left-col">
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="currentCommand">Current Process</a></li>
+                            <li><a href="upload">Upload</a></li>
+                            <li><a href="download">Download</a></li>
+                            <li><a href="prokka">Prokka</a></li>
+                            <li><a href="roary">Roary</a></li>
+                            <li><a href="roaryPlots">Roary Plots</a></li>
+                            <li><a href="cloudCoreGenome">Cloud/Core/Shell Genome</a></li>
+                            <li><a href="queryPanGenome">Query Pan Genome</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="right-col">
+                     <form id="form"><!--action="/upload" method="POST" enctype="multipart/form-data"-->
+                        <input type="file" id="file" name="pangenomeFile" multiple>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
+                        <br>
+                        <label for="progress-bar">0%</label>
+                        <progress id="progress-bar" value="0" max="100"></progress>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+
+    </footer>
+
+</html>

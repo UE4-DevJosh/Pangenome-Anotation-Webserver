@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>	
+	    <title>Pangenome Server [Cloud/Core/Shell Genome]</title>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/tables.css">
+        <script src="js/cloudCoreGenome.js" defer></script>
+    </head>
+
+    <body>
+        <div id="main">
+            <div id="banner">
+                <h1>Pangenome Server [Cloud/Core/Shell Genome]</h1>
+            </div>
+            <div id="nested">
+                <div id="left-col">
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="currentCommand">Current Process</a></li>
+                            <li><a href="upload">Upload</a></li>
+                            <li><a href="download">Download</a></li>
+                            <li><a href="prokka">Prokka</a></li>
+                            <li><a href="roary">Roary</a></li>
+                            <li><a href="roaryPlots">Roary Plots</a></li>
+                            <li><a href="cloudCoreGenome">Cloud/Core/Shell Genome</a></li>
+                            <li><a href="queryPanGenome">Query Pan Genome</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="right-col">
+                    <form action="/cloudCoreGenome" method="POST" name="cloudCoreGenome" id="cloudCoreGenomeForm">
+                        <table>
+                            <tr>
+                                <td>
+                                    <!--<input type="checkbox" id="contigs" name="contigs" value="contigs">
+                                    <label for="contigs">Contigs File</label><br>-->
+                                    <h4>Gene Presence and Absence File [.csv] <strong>REQUIRED</strong></h2>
+                                </td>
+                                <td>
+                                    <select id="genePresenceAbsenceText" name="genePresenceAbsenceText">
+                                        <!--<option value="Archaea">Archaea</option>-->
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!--<input type="checkbox" id="contigs" name="contigs" value="contigs">
+                                    <label for="contigs">Contigs File</label><br>-->
+                                    <h4>Pan Genome Reference File [.fa] <strong>REQUIRED</strong></h2>
+                                </td>
+                                <td>
+                                    <select id="panGenomeText" name="panGenomeText">
+                                        <!--<option value="Archaea">Archaea</option>-->
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        </table>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+
+    </footer>
+
+</html>

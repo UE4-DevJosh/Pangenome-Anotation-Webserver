@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>	
+	    <title>Pangenome Server [Prokka]</title>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/tables.css">
+        <script src="js/main.js" defer></script>
+        <script src="js/prokka.js" defer></script>
+    </head>
+
+    <body>
+
+        <div id="main">
+            <div id="banner">
+                <h1>Pangenome Server [Prokka]</h1>
+            </div>
+            <div id="nested">
+                <div id="left-col">
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="currentCommand">Current Process</a></li>
+                            <li><a href="upload">Upload</a></li>
+                            <li><a href="download">Download</a></li>
+                            <li><a href="prokka">Prokka</a></li>
+                            <li><a href="roary">Roary</a></li>
+                            <li><a href="roaryPlots">Roary Plots</a></li>
+                            <li><a href="cloudCoreGenome">Cloud/Core/Shell Genome</a></li>
+                            <li><a href="queryPanGenome">Query Pan Genome</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="right-col">
+                    <form action="/prokka" method="POST" name="prokka" id="prokkaForm">
+                        <table>
+                            <tr>
+                                <td>
+                                    <!--<input type="checkbox" id="contigs" name="contigs" value="contigs">
+                                    <label for="contigs">Contigs File</label><br>-->
+                                    <h4>Contigs File <strong>REQUIRED</strong></h2>
+                                </td>
+                                <td>
+                                    <select id="contigsText" name="contigsText">
+                                        <!--<option value="Archaea">Archaea</option>-->
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="prefix" name="prefix" value="prefix">
+                                    <label for="prefix">Filename Output Prefix</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="prefixText" id="prefixText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="addGenes" name="addgenes" value="addGenes">
+                                    <label for="addGenes">Add 'gene' Features for each 'CDS' feature</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="locusTag" name="locustag" value="locusTag">
+                                    <label for="locusTag">Locus Tag Prefix</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="locusTagText" id="locusTagText" >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="increment" name="increment" value="increment">
+                                    <label for="increment">Locus Tag Counter Increment</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="incrementText" id="incrementText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="gffVer" name="gffver" value="gffVer">
+                                    <label for="gffVer">GFF Version</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="gffVerText" id="gffVerText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="compliant" name="compliant" value="compliant">
+                                    <label for="compliant">Force Genbank/ENA/DDJB Compliance</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="centre" name="centre" value="centre">
+                                    <label for="centre">Sequencing Centre ID</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="centreText" id="centreText">
+                                </td>
+                            </tr>
+
+                            <!-- Organism Details -->
+
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="genus" name="genus" value="genus">
+                                    <label for="genus">Genus Name</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="genusText" id="genusText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="species" name="species" value="species">
+                                    <label for="species">Species Name</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="speciesText" id="speciesText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="strain" name="strain" value="strain">
+                                    <label for="strain">Strain Name</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="strainText" id="strainText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="plasmid" name="plasmid" value="plasmid">
+                                    <label for="plasmid">Plasmid Name or Identifier</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="plasmidText" id="plasmidText">
+                                </td>
+                            </tr>
+
+                            <!-- Organism Details -->
+
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="kingdom" name="kingdom" value="kingdom">
+                                    <label for="kingdom">Annotaion Mode</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <select id="kingdomText" name="kingdomText">
+                                        <option value="Archaea">Archaea</option>
+                                        <option value="Bacteria">Bacteria</option>
+                                        <option value="Mitochondria">Mitochondria</option>
+                                        <option value="Viruses">Viruses</option>
+                                      </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="gcode" name="gcode" value="gcode">
+                                    <label for="gcode">Genetic Code / Translation Table</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="gcodeText" id="gcodeText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="prodigalFile" name="prodigaltf" value="prodigalFile">
+                                    <label for="prodigalFile">Prodigal Training File</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="prodigalFileText" id="prodigalFileText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="gram" name="gram" value="gram">
+                                    <label for="gram">Gram: -/neg +/pos</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="gramText" id="gramText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="useGenus" name="usegenus" value="useGenus">
+                                    <label for="useGenus">Use Genus-Specific BLAST Databases</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="proteins" name="proteins" value="proteins">
+                                    <label for="proteins">Fasta File of Trusted Proteins to First Annotate From</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="proteinsText" id="proteinsText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="hmms" name="hmms" value="hmms">
+                                    <label for="hmms">Trusted HMM To First Annotate From</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="hmmsText" id="hmmsText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="metaGenome" name="metagenome" value="metaGenome">
+                                    <label for="metaGenome">Improve Gene Predictions for Highly Fagmented Genomes</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="rawProduct" name="rawproduct" value="rawProduct">
+                                    <label for="rawProduct">Do not Clean up /product Annotation</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+
+                            <!-- Computation -->
+
+                            
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="fast" name="fast" value="fast">
+                                    <label for="fast">Fast Mode - Skip CDS /product Searching</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="cpus" name="cpus" value="cpus">
+                                    <label for="cpus">Number of CPUs to Use</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <select id="cpusText" name="cpusText">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                      </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="minContiglen" name="mincontiglen" value="minContiglen">
+                                    <label for="minContiglen">Minimum Contig Size</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="minContiglenText" id="minContiglenText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input onclick="toggle(this)" type="checkbox" id="evalue" name="evalue" value="evalue">
+                                    <label for="evalue">Similarity E-Value Cut-Off</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                    <input type="text" name="evalueText" id="evalueText">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="rfam" name="rfam" value="rfam">
+                                    <label for="rfam">Enable Searching for ncRNAs with Infernal+RFam</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="norrna" name="norrna" value="norrna">
+                                    <label for="norrna">Don't Run rRNA search</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="notrna" name="notrna" value="notrna">
+                                    <label for="notrna">Don't Run tRNA search</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="rnamer" name="rnamer" value="rnamer">
+                                    <label for="rnamer">Prefer RNAmmer Over Barrnap for rRNA Prediction</label><br>
+                                </td>
+                                <td class="extraInfo">
+                                </td>
+                            </tr>
+
+                        </table>
+                        </table>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+
+    </footer>
+
+</html>
